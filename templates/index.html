@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Style for chart containers */
+        .chart-container {
+            border: 1px solid #ddd; /* Border around the chart */
+            background-color: #f9f9f9; /* Light background */
+            margin-bottom: 20px; /* Spacing between charts */
+            padding: 20px; /* Padding inside the chart container */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        /* Style for footer */
+        footer {
+            background-color: #E3DDDC; /* Dark background color */
+            color: black; /* Text color */
+            padding: 5px 0; /* Padding top and bottom */
+            text-align: center; /* Center-align text */
+            position: absolute; /* Absolute positioning */
+            width: 100%; /* Full width */
+            bottom: 0; /* Stick to the bottom */
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        // function for intensity
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(IntensityChart);
+
+        function IntensityChart() {
+            var data = google.visualization.arrayToDataTable({{ intensity | safe }});
+
+            var options = {
+                title: 'Intensity Distribution',
+                legend: { position: 'none' }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('intensity_chart'));
+            chart.draw(data, options);
+        }
+
+
+        // function for likelihood
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(likelihoodChart);
+
+        function likelihoodChart() {
+            var data = google.visualization.arrayToDataTable({{ likelihood | safe }});
+
+            var options = {
+                title: 'Likelihood Distribution',
+                legend: { position: 'none' }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('likelihood_chart'));
+            chart.draw(data, options);
+        }
+
+
+        // function for relevance
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(RelevanceChart);
+
+        function RelevanceChart() {
+            var data = google.visualization.arrayToDataTable({{ relevance | safe }});
+
+            var options = {
+                title: 'Relevance Distribution',
+                legend: { position: 'none' }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('relevance_chart'));
+            chart.draw(data, options);
+        }
+
+
+        // function for country
+        google.charts.load('current', {'packages':['geochart']});
+        google.charts.setOnLoadCallback(CountryChart);
+
+        function CountryChart() {
+            var data = google.visualization.arrayToDataTable({{ country | safe }});
+
+            var options = {
+                title: 'Country Distribution',
+                legend: { position: 'none' }
+            };
+
+            var chart = new google.visualization.GeoChart(document.getElementById('country_chart'));
+            chart.draw(data, options);
+        }
+
+
+
+        // function for topic
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(TopicChart);
+
+        function TopicChart() {
+            var data = google.visualization.arrayToDataTable({{ topic | safe }});
+
+            var options = {
+                title: 'Topic Distribution',
+                legend: { position: 'none' }
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('topic_chart'));
+            chart.draw(data, options);
+        }
+
+
+
+        // function for region
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(RegionChart);
+
+        function RegionChart() {
+            var data = google.visualization.arrayToDataTable({{ region | safe }});
+
+            var options = {
+                title: 'Region Distribution',
+                legend: { position: 'none' }
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('region_chart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Dashboard</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <div id="intensity_chart" class="chart-container" style="width: 100%; height: 400px;"></div>
+        </div>
+        <div class="col-lg-6">
+            <div id="likelihood_chart" class="chart-container" style="width: 100%; height: 400px;"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div id="relevance_chart" class="chart-container" style="width: 100%; height: 400px;"></div>
+        </div>
+        <div class="col-lg-6">
+            <div id="country_chart" class="chart-container" style="width: 100%; height: 400px;"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div id="topic_chart" class="chart-container" style="width: 100%; height: 400px;"></div>
+        </div>
+        <div class="col-lg-6">
+            <div id="region_chart" class="chart-container" style="width: 100%; height: 400px;"></div>
+        </div>
+    </div>
+</div>
+
+<footer class="fixed-bottom">
+    <p>Other projects: <a href="https://github.com/mujjasaikumar/" target="_blank">GitHub</a></p>
+</footer>
+
+</body>
+</html>
